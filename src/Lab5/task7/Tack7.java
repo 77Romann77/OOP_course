@@ -18,7 +18,7 @@ public class Tack7 {
         String game;
 
         // 3. Виведіть вітальне повідомлення та список можливих символів.
-        System.out.println("Хай ти попав на гру 'Слот-машина'!!!");
+        System.out.println("Хай, ти попав на гру 'Слот-машина'!!!");
         System.out.println("В грі може бути такі символи:" + Arrays.toString(elements));
         // 4. Запустіть цикл гри, доки баланс більше нуля:
         do {
@@ -31,30 +31,38 @@ public class Tack7 {
             // - Перевірте коректність введеної ставки (не більше балансу, понад 0).
             if (stavka <= 0 || balance < stavka) {
                 System.out.println("Введено невірну ставку!!!");
-            }
-            // - Відніміть ставку з балансу.
-            balance -= stavka;
-            // - Запустіть обертання барабанів.
-            String[] result = spinRow();
-            // - Виведіть результат обертання.
-            printRow(result);
-            // - Обчисліть можливий виграш.
-            win = getPayout(result, stavka);
-            // - Додайте виграш до балансу, якщо він є.
-            balance += win;
-            if (win > 0) {
-                System.out.println("Ви вийграли " + win);
             } else {
-                System.out.println("Ви програли " + stavka);
+                // - Відніміть ставку з балансу.
+                balance -= stavka;
+                // - Запустіть обертання барабанів.
+                String[] result = spinRow();
+                // - Виведіть результат обертання.
+                printRow(result);
+                // - Обчисліть можливий виграш.
+                win = getPayout(result, stavka);
+                // - Додайте виграш до балансу, якщо він є.
+                balance += win;
+                if (win > 0) {
+                    System.out.println("Ви вийграли " + win);
+                } else {
+                    System.out.println("Ви програли " + stavka);
+                }
+                System.out.println("Ваш баланс після:" + balance);
             }
-            System.out.println("Ваш баланс після:" + balance);
+
+            if (balance == 0) {
+                System.out.println("Ваш рахунок 0 !!!");
+                break;
+            }
+
             // - Запитайте у користувача, чи хоче він продовжити гру.
             System.out.println("Ви хочете грати ще (yes/no)?");
             game = scanner.nextLine();
-        } while (game.equals("yes"));
-        System.out.println("Гра завершена!!!");
-        // 5. Виведіть фінальне повідомлення про завершення гри.
+        } while (game.equals("yes") && balance > 0);
 
+        // 5. Виведіть фінальне повідомлення про завершення гри.
+        System.out.println("Гра завершена!!!");
+        scanner.close();
     }
 
     /**
