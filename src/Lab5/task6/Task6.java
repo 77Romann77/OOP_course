@@ -12,7 +12,6 @@ public class Task6 {
         String[] variant = {"rock", "paper", "scissors"};
         // 3. Оголосіть змінні для збереження вибору гравця та комп’ютера
         String player = "";
-        int pc;
         // 4. Реалізуйте цикл для повторення гри
         System.out.println("Гра почалась!!!");
         String play = "yes";
